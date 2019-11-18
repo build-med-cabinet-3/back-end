@@ -29,7 +29,7 @@ function getByEmail(filter) {
 async function add(body) {
 
 
-    return db('register').insert(body)
+    return db('register').insert(body,'id')
     .then(([register_id]) => {
         return db('register').where({register_id}).first()
     });
