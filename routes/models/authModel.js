@@ -1,7 +1,7 @@
 const db = require('../../data/dbConfig');
 
 module.exports = {
-    //getAll,
+    getAll,
     //getById,
     //update,
     getByEmail,
@@ -9,9 +9,9 @@ module.exports = {
     //remove    
 }
 
-//function getAll() {
-    
-//}
+function getAll() {
+    return db('register')
+}
 
 //function getById() {
     
