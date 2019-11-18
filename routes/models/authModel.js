@@ -28,7 +28,7 @@ function getByEmail(filter) {
 
 async function add(body) {
 
-    const [register_id] = await db('register').insert(body,'id')
+    const [register_id] = await db('register').insert(body,'register_id')
     return db('register')
     .where({register_id})
     .first();
