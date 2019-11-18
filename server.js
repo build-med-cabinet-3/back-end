@@ -15,7 +15,7 @@ server.use(express.json())
 
 
 server.use('/user', authRouter);
-server.use('/product', productRouter);
+server.use('/product', authenticate ,productRouter);
 
 
 

@@ -3,6 +3,18 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const db = require('../routes/models/authModel');
 
+
+router.get('/register', (req,res) =>{
+    db.getAll()
+    .then(users => {
+        res.status(200).json(users)
+    })
+    .catch(err => {
+        res.status(500).json({message:'error getting registered users'})
+    })
+})
+
+
 router.post('/register',(req,res) => {
     const body = req.body;
 
