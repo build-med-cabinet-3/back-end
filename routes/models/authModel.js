@@ -28,11 +28,14 @@ function getByEmail(filter) {
 
 async function add(body) {
 
-
-    return db('register').insert(body,'id')
-    .then(([register_id]) => {
-        return db('register').where({register_id}).first()
-    });
+    const [id] = await db('register').insert(body,'id')
+    return db('register')
+    .where({id})
+    .first();
+    // return db('register').insert(body,'id')
+    // .then(([register_id]) => {
+    //     return db('register').where({register_id}).first()
+    // });
 };
 
 //function remove() {
