@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const db = require('../routes/models/productModel');
 
 router.get('/', (req,res) =>{
     db.getAll()
@@ -21,7 +22,7 @@ router.post('/', (req,res) =>{
     })
 })
 
-router.put('/', (req,res) =>{
+router.put('/:id', (req,res) =>{
     let body = req.body;
     let id = req.params.id;
     db.update(id,body)

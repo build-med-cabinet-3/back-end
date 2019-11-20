@@ -10,7 +10,7 @@ module.exports = {
 }
 
 function getAll() {
-    return db('register')
+    return db('register');
 }
 
 function getSavedById(id) {

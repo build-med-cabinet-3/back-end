@@ -2,7 +2,30 @@ const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const db = require('../routes/models/authModel');
+const savedDB = require('../routes/models/savedModel');
 
+
+
+router.get('/:id/saved', (req,res) =>{
+    let id = req.params.id;
+    savedDB.getSavedById(id)
+    .then(saved => {
+        res.status(200).json(saved)
+    })
+    .catch(err => {
+        res.status(500).json({message:err.toString()})
+    })
+})
+router.post('/:id/saved', (req,res) =>{
+    let body = req.body;
+    savedDB.add(body)
+    .then(saved => {
+        res.status(200).json(saved)
+    })
+    .catch(err => {
+        res.status(500).json({message:err.toString()})
+    })
+})
 
 router.get('/register', (req,res) =>{
     db.getAll()
@@ -10,7 +33,7 @@ router.get('/register', (req,res) =>{
         res.status(200).json(users)
     })
     .catch(err => {
-        res.status(500).json({message:'error getting registered users'})
+        res.status(500).json({message:err.toString()})
     })
 })
 
@@ -50,7 +73,8 @@ router.post('/login',(req,res) => {
         res.status(500).json({ message: error.toString() });
     });
 })
-
+//GRAB token in front end send ID in post to saved db
+// front end sets token in local storage get reg ID from local storage token
 function getJwtToken(user){
     const payload = {
         id: user.register_id,
