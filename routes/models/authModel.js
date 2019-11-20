@@ -2,7 +2,7 @@ const db = require('../../data/dbConfig');
 
 module.exports = {
     getAll,
-    //getById,
+    // getSavedById,
     //update,
     getByEmail,
     add,
@@ -10,15 +10,19 @@ module.exports = {
 }
 
 function getAll() {
-    return db('register')
+    return db('register');
 }
 
-//function getById() {
-    
-//}
+function getSavedById(id) {
+    return db('saved')
+    .join('register','register_id','saved.register_id')
+    .select()
+    .where('saved.register_id','=', id)
+}
 
-//function update() {
-    
+//function update(id,change) {
+    return db('saved')
+    .where({})
 //}
 
 function getByEmail(filter) {
