@@ -15,9 +15,9 @@ function getAll() {
 
 function getSavedById(id) {
     return db('saved')
-    .join('register','register_id','saved.register_id')
+    .join('register','register.id','saved.registerId')
     .select()
-    .where('saved.register_id','=', id)
+    .where('saved.registerId','=', id)
 }
 
 //function update(id,change) {
@@ -32,9 +32,9 @@ function getByEmail(filter) {
 
 async function add(body) {
 
-    const [register_id] = await db('register').insert(body,'register_id')
+    const [id] = await db('register').insert(body,'id')
     return db('register')
-    .where({register_id})
+    .where({id})
     .first();
     // return db('register').insert(body,'id')
     // .then(([register_id]) => {

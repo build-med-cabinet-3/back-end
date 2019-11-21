@@ -23,9 +23,9 @@ function update(id,change) {
 
 async function add(body) {
 
-    const [saved_id] = await db('saved').insert(body,'saved_id')
+    const [id] = await db('saved').insert(body,'id')
     return db('saved')
-    .where({saved_id})
+    .where({id})
     .first();
     // return db('register').insert(body,'id')
     // .then(([register_id]) => {

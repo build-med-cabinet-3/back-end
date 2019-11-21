@@ -16,9 +16,9 @@ function getSavedById(id) {
     return db
     .select('saved.strain')
     .from('saved')
-    .join('register','register.register_id','saved.register_id')
+    .join('register','register.id','saved.registerId')
     
-    .where('saved.register_id','=', id)
+    .where('saved.registerId','=', id)
 }
 
 function update(id,change) {
@@ -31,9 +31,10 @@ function update(id,change) {
 
 async function add(body) {
 
-    const [saved_id] = await db('saved').insert(body,'id')
+    const [id] = await db('saved').insert(body,'id')
+    // possibly change back to saved_id
     return db('saved')
-    .where({saved_id})
+    .where({id})
     .first();
     // return db('register').insert(body,'id')
     // .then(([register_id]) => {
