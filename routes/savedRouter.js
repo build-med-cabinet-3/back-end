@@ -1,8 +1,35 @@
+const express = require('express')
 const router = require('express').Router();
-const db = require('../routes/models/savedModel');
+const savedDb = require('../routes/models/savedModel');
+const authenticateMW = require('../routes/authenticateMW')
 
 
-router.get('/')
+router.post('/',authenticateMW ,(req,res) =>{
+    let body = req.body;
+    savedDb.add(body)
+    .then(saved => {
+        res.status(200).json(saved)
+    })
+    .catch(err => {
+        res.status(500).json({message:err.toString()})
+    })
+})
+
+router.get('/',authenticateMW,(req,res) =>{
+    //     console.log(req.header.authorization)
+    //     let realToken = req.header.authorization;
+    //     var decoded = jwt_decode(realToken);
+    const {firstName, registerId} = req.decodedJwt;
+    console.log(registerId);
+        let id = registerId;
+        savedDb.getSavedById(id)
+        .then(saved => {
+            res.status(200).json(saved)
+        })
+        .catch(err => {
+            res.status(500).json({message:err.toString()})
+        })
+    })
 
 
 

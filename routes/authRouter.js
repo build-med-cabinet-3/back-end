@@ -4,9 +4,9 @@ const jwt = require('jsonwebtoken');
 const db = require('../routes/models/authModel');
 const savedDB = require('../routes/models/savedModel');
 const jwt_decode = require('jwt-decode');
+const authenticateMW = require('../routes/authenticateMW')
 
-
-
+const secret = process.env.JWT_SECRET || 'NO SEE'
 
 // router.get('/saved', (req,res) =>{
 //     let id = decoded.id;
@@ -18,18 +18,9 @@ const jwt_decode = require('jwt-decode');
 //         res.status(500).json({message:err.toString()})
 //     })
 // })
-router.post('/saved', (req,res) =>{
-    let body = req.body;
-    savedDB.add(body)
-    .then(saved => {
-        res.status(200).json(saved)
-    })
-    .catch(err => {
-        res.status(500).json({message:err.toString()})
-    })
-})
 
-router.get('/register', (req,res) =>{
+
+router.get('/register',(req,res) =>{
     db.getAll()
     .then(users => {
         res.status(200).json(users)
@@ -77,25 +68,12 @@ router.post('/login',(req,res) => {
         res.status(500).json({ message: error.toString() });
     });
 })
-router.get('/saved', (req,res) =>{
-    console.log(req.header.authorization)
-    let realToken = req.header.authorization;
-    var decoded = jwt_decode(realToken);
-console.log(decoded);
-    let id = decoded.id;
-    savedDB.getSavedById(id)
-    .then(saved => {
-        res.status(200).json(saved)
-    })
-    .catch(err => {
-        res.status(500).json({message:err.toString()})
-    })
-})
+
 //GRAB token in front end send ID in post to saved db
 // front end sets token in local storage get reg ID from local storage token
 function getJwtToken(user){
     const payload = {
-        userId: user.id,
+        registerId: user.id,
         firstName: user.first_name,
         lastName: user.lastName
     };

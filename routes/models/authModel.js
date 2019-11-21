@@ -20,10 +20,10 @@ function getSavedById(id) {
     .where('saved.registerId','=', id)
 }
 
-//function update(id,change) {
+function update(id,change) {
     return db('saved')
     .where({})
-//}
+}
 
 function getByEmail(filter) {
     

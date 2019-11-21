@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
 
 module.exports = (req,res,next) => {
-    const token = req.header.authorization;
-
+    const token = req.headers.authorization;
+    console.log("tpkennn",token)
     if(token){
         const secret = process.env.JWT_SECRET || 'NO SEE'
         jwt.verify(token,secret,(err,decodedToken) => {
