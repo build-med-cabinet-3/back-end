@@ -3,11 +3,13 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const db = require('../routes/models/authModel');
 const savedDB = require('../routes/models/savedModel');
+const jwt_decode = require('jwt-decode');
 
 
 
-router.get('/:id/saved', (req,res) =>{
-    let id = req.params.id;
+
+router.get('/saved', (req,res) =>{
+    let id = req.headers.authorization;
     savedDB.getSavedById(id)
     .then(saved => {
         res.status(200).json(saved)
@@ -16,7 +18,7 @@ router.get('/:id/saved', (req,res) =>{
         res.status(500).json({message:err.toString()})
     })
 })
-router.post('/:id/saved', (req,res) =>{
+router.post('/saved', (req,res) =>{
     let body = req.body;
     savedDB.add(body)
     .then(saved => {
@@ -64,6 +66,7 @@ router.post('/login',(req,res) => {
         if(user && bcrypt.compareSync(password,user.password)){
             const token = getJwtToken(user);
             res.status(200).json({message:`Welcome ${user.first_name}`, token});
+            
         }else{
             res.status(401).json({message:'invalid login information'})
         }
@@ -77,7 +80,7 @@ router.post('/login',(req,res) => {
 // front end sets token in local storage get reg ID from local storage token
 function getJwtToken(user){
     const payload = {
-        id: user.register_id,
+        id: user.id,
         firstName: user.first_name,
         lastName: user.last_name
     };
