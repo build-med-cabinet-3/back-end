@@ -42,7 +42,7 @@ async function add(body) {
     // });
 };
 
-function remove() {
+function remove(id) {
     return db('saved')
     .where('id', id)
     .del();
