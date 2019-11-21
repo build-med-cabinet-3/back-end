@@ -95,7 +95,7 @@ console.log(decoded);
 // front end sets token in local storage get reg ID from local storage token
 function getJwtToken(user){
     const payload = {
-        id: user.id,
+        userId: user.id,
         firstName: user.first_name,
         lastName: user.lastName
     };
