@@ -27,12 +27,12 @@ exports.up = function(knex) {
         tbl.increments();
         tbl.string('strain',255).notNullable();
         tbl.string('effect',255).notNullable();
-        tbl.string('medical_effect_plain',255).notNullable()
+        tbl.string('medical_effect_plain').notNullable()
         tbl.string('flavor',255).notNullable();
         tbl.string('Type',255).notNullable();
         tbl.string('THC_Percent',255).notNullable();
         tbl.string('CBD',255).notNullable();
-        tbl.string('Description1',255).notNullable();
+        tbl.string('Description1').notNullable();
         tbl.float('Score').notNullable();
         tbl.integer('Recommendation');
         tbl.integer('exp');
