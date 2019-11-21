@@ -31,6 +31,29 @@ router.get('/',authenticateMW,(req,res) =>{
         })
     })
 
+    router.put('/:id',authenticateMW ,(req,res) =>{
+        let body = req.body;
+        let id = req.params.id
+        savedDb.update(id, body)
+        .then(updated => {
+            res.status(200).json(updated)
+        })
+        .catch(err => {
+            res.status(500).json({message:err.toString()})
+        })
+    })
+
+    router.delete('/:id',authenticateMW ,(req,res) =>{
+        let id = req.params.id;
+        savedDb.remove(id)
+        .then(deleted => {
+            res.status(200).json(deleted)
+        })
+        .catch(err => {
+            res.status(500).json({message:err.toString()})
+        })
+    })
+
 
 
 
