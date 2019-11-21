@@ -25,20 +25,20 @@ exports.up = function(knex) {
     })
     .createTable('saved', tbl => {
         tbl.increments();
-        tbl.string('strain',255).notNullable();
-        tbl.string('effect',255).notNullable();
-        tbl.string('medical_effect_plain').notNullable()
-        tbl.string('flavor',255).notNullable();
-        tbl.string('Type',255).notNullable();
-        tbl.string('THC_Percent',255).notNullable();
-        tbl.string('CBD',255).notNullable();
-        tbl.string('Description1').notNullable();
+        tbl.string('strain',500).notNullable();
+        tbl.string('effect',500).notNullable();
+        tbl.string('medical_effect_plain',2000).notNullable()
+        tbl.string('flavor',500).notNullable();
+        tbl.string('Type',500).notNullable();
+        tbl.string('THC_Percent',500).notNullable();
+        tbl.string('CBD',500).notNullable();
+        tbl.string('Description1',2000).notNullable();
         tbl.float('Score').notNullable();
         tbl.integer('Recommendation');
         tbl.integer('exp');
         tbl.integer('iat');
-        tbl.string('firstName',255).notNullable();
-        tbl.string('lastName',255).notNullable();
+        tbl.string('firstName',500).notNullable();
+        tbl.string('lastName',500).notNullable();
         
         
         tbl.integer('registerId')
