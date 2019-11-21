@@ -31,10 +31,10 @@ function update(id,change) {
 
 async function add(body) {
 
-    const [id] = await db('saved').insert(body,'id')
+    const [registerId] = await db('saved').insert(body,'id')
     // possibly change back to saved_id
     return db('saved')
-    .where({id})
+    .where({registerId})
     .first();
     // return db('register').insert(body,'id')
     // .then(([register_id]) => {
