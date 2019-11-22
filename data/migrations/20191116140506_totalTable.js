@@ -34,11 +34,11 @@ exports.up = function(knex) {
         tbl.string('CBD',500).notNullable();
         tbl.string('Description1',2000).notNullable();
         tbl.float('Score').notNullable();
-        tbl.integer('Recommendation');
+        tbl.integer('Recommendation').notNullable();
         tbl.integer('exp');
         tbl.integer('iat');
-        tbl.string('firstName',500).notNullable();
-        tbl.string('lastName',500).notNullable();
+        tbl.string('firstName',500);
+        tbl.string('lastName',500);
         
         
         tbl.integer('registerId')
