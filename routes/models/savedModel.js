@@ -14,7 +14,7 @@ function getAll() {
 
 function getSavedById(id) {
     return db
-    .select('saved.strain','saved.Description1','saved.THC_Percent','saved.Type','saved.effect','saved.flavor','saved.CBD','saved.id','saved.Score','saved.Recommendation','saved.medical_effect_plain','firstName','lastName')
+    .select('saved.strain','saved.Description1','saved.THC_Percent','saved.Type','saved.effect','saved.flavor','saved.CBD','saved.id','saved.Score','saved.Recommendation','saved.medical_effect_plain')
     .from('saved')
     .join('register','register.id','saved.registerId')
     
